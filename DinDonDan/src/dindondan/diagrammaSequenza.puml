@@ -1,0 +1,33 @@
+
+@startuml
+actor Utente
+participant main
+entity Semaforo_1
+entity DatiCondivisi
+
+Utente -> main ++ : start
+Utente -> main : numero
+
+main -> Semaforo_1 ** : new
+main -> DatiCondivisi ** : new
+
+
+main -> ThIncrementa ** : new
+main -> ThControlla ** : new 
+
+main -> ThIncrementa ++ : start
+main -> ThControlla ++ : start
+
+ThIncrementa -> main : return
+deactivate ThIncrementa
+ThControlla -> main : return
+deactivate ThControlla
+
+note over main : join ThIncrementa
+note over main : join ThControlla
+
+main -> Utente : percentuale d'errore
+
+deactivate main
+
+@enduml
